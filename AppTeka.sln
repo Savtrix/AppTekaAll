@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTeka", "AppTeka.csproj", "{65A5B260-A809-4E42-B47C-CD307528CABA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65A5B260-A809-4E42-B47C-CD307528CABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A5B260-A809-4E42-B47C-CD307528CABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A5B260-A809-4E42-B47C-CD307528CABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A5B260-A809-4E42-B47C-CD307528CABA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73E79B43-BEAD-4857-8BE0-7583AA834C6E}
+	EndGlobalSection
+EndGlobal
