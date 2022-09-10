@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClientAppTeka.Pages;
 
 namespace ClientAppTeka
 {
@@ -23,16 +24,13 @@ namespace ClientAppTeka
     {
         public MainWindow()
         {
-            LoadData();
             InitializeComponent();
         }
 
-        private async void LoadData()
+        private void order_Click(object sender, RoutedEventArgs e)
         {
-            var drugs = new Operations<Drug>();
-            List<Drug> drugList = new List<Drug>();
-            drugList = await drugs.GetMyObjectAsync();
-            data.ItemsSource = drugList;
+            order.IsEnabled = false;
+            content.Content = new ClientAppTeka.Pages.Order();
         }
     }
 }
