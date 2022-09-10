@@ -16,14 +16,26 @@ namespace AppTeka.Controllers
             _context = context;
         }
 
-        [HttpGet("{Name}/{Password}")]
-        public async Task<ActionResult<Account>> Get(string Name, string Password)
+        [HttpGet("{Id}/{Password}/1")]
+        public async Task<ActionResult<Account>> Get(string Id, string Password)
         {
-            var Account = await _context.Accounts.FindAsync(Name);
-
+            var Account = await _context.Accounts.FindAsync(Id);
+            if (Account == null)
+                return BadRequest("Account Not Found");
             if (Account.Password != Password)
                 return BadRequest("Wrong Password");
-            return Ok();
+            return Ok(Account);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<List<Doctor>>> CheckAccount(Account account)
+        {
+            var Account = await _context.Accounts.FindAsync(account.Id);
+            if (Account == null)
+                return BadRequest("Account Not Found");
+            if (Account.Password.Replace(" ","") != account.Password)
+                return BadRequest("Wrong Password");
+            return Ok(Account);
         }
     }
 }
