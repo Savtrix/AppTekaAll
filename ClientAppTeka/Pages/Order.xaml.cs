@@ -34,8 +34,8 @@ namespace ClientAppTeka.Pages
 
         private async void LoadData()
         {
-            var Odrugs = new Operations<Drug>();
-            drugList = await Odrugs.GetMyObjectAsync();
+            var OPdrugs = new Operations<Drug>();
+            drugList = await OPdrugs.GetMyObjectAsync();
 
             drugs.ItemsSource = drugList.Select(x => x.Name);
         }

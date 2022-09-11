@@ -12,13 +12,9 @@ namespace ClientAppTeka
 {
     internal class Operations<T>
     {
-        public List<T> elements;
+        
         private string name = typeof(T).Name.ToLower();
 
-        public async Task OnGet()
-        {
-            elements = await GetMyObjectAsync();
-        }
 
         public async Task<List<T>> GetMyObjectAsync(CancellationToken cts = default)
         {
