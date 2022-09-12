@@ -53,5 +53,9 @@ namespace ClientAppTeka.Pages
             else
                 orderList.Add(new KeyValuePair<string, int>(drugs.SelectedItem as string, Convert.ToInt32(count.Text)));
         }
+
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
