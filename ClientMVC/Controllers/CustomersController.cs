@@ -1,24 +1,32 @@
 ﻿#nullable disable
 
-using AppTeka.Models;
-using ClientMVC.Data;
-using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using AppTeka.Models;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 using System.Text;
+using System.Net.Http.Headers;
+using ClientMVC.Models;
+using System.Globalization;
+using ClientMVC.Data;
 
 namespace ClientMVC.Controllers
 {
     [Authorize]
-    public class DrugsController : Controller
+    public class CustomersController : Controller
     {
-        // GET: Drugss
+        // GET: Customerss
         public async Task<IActionResult> Index()
         {
             var _httpClient = new HttpClient();
             // http get request to a rest api address
-            var myObject = await _httpClient.GetFromJsonAsync<List<Drug>>($"{ControllerConstants.DefaultURI}/api/drug", new CancellationToken());
+            var myObject = await _httpClient.GetFromJsonAsync<List<Customer>>($"{ControllerConstants.DefaultURI}/api/Customer", new CancellationToken());
 
             // raise error if deserialization was not possible
             if (myObject == null)
@@ -27,28 +35,28 @@ namespace ClientMVC.Controllers
             return View(myObject);
         }
 
-        // GET: Drugs/Details/5
+        // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             return NotFound();
         }
 
-        // GET: Drugs/Create
+        // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Drugs/Create
+        // POST: Customers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,NeedPrescribtion")] Drug drug)
+        public async Task<IActionResult> Create([Bind("Name,Price,NeedPrescribtion")] Customer Customer)
         {
             if (ModelState.IsValid)
             {
-                string json = JsonConvert.SerializeObject(drug);
+                string json = JsonConvert.SerializeObject(Customer);
                 var httpRequestMessage = new HttpRequestMessage
                 {
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
@@ -58,19 +66,19 @@ namespace ClientMVC.Controllers
                 var client = new HttpClient();
                 using (client)
                 {
-                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/Drug", httpRequestMessage.Content);
+                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/Customer", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View(drug);
+            return View(Customer);
         }
 
-        // GET: Drugs/Edit/5
+        // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             var _httpClient = new HttpClient();
             // http get request to a rest api address
-            var myObject = await _httpClient.GetFromJsonAsync<Drug>($"{ControllerConstants.DefaultURI}/api/drug/{id}", new CancellationToken());
+            var myObject = await _httpClient.GetFromJsonAsync<Customer>($"{ControllerConstants.DefaultURI}/api/Customer/{id}", new CancellationToken());
 
             // raise error if deserialization was not possible
             if (myObject == null)
@@ -79,16 +87,16 @@ namespace ClientMVC.Controllers
             return View(myObject);
         }
 
-        // POST: Drugs/Edit/5
+        // POST: Customers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,NeedPrescribtion")] Drug drug)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,NeedPrescribtion")] Customer Customer)
         {
             if (ModelState.IsValid)
             {
-                string json = JsonConvert.SerializeObject(drug);
+                string json = JsonConvert.SerializeObject(Customer);
                 var httpRequestMessage = new HttpRequestMessage
                 {
                     Content = new StringContent(json, Encoding.UTF8, "application/json")
@@ -98,20 +106,20 @@ namespace ClientMVC.Controllers
                 var client = new HttpClient();
                 using (client)
                 {
-                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/Drug", httpRequestMessage.Content);
+                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/Customer", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View(drug);
+            return View(Customer);
         }
 
-        // GET: Drugs/Delete/5
+        // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             var client = new HttpClient();
             using (client)
             {
-                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/Drug/{id}");
+                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/Customer/{id}");
             }
             return RedirectToAction(nameof(Index));
         }

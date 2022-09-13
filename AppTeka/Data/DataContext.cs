@@ -17,6 +17,5 @@ namespace AppTeka.Data
         public DbSet<ShopAssistant> ShopAssistants { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Account> Accounts { get; set; }
     }
 }
