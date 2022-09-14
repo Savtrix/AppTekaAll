@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "/Views/Shared/_Layout.cshtml";
+     var _httpClient = new HttpClient();
+    List<AppTeka.Models.Drug>? drugs = await _httpClient.GetFromJsonAsync<List<AppTeka.Models.Drug>>($"{ClientMVC.Data.ControllerConstants.DefaultURI}/api/drug", new CancellationToken());
 }
 
 <h1>Edit</h1>
@@ -21,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DrugId" class="control-label">DrugId</label>
-                <input asp-for="DrugId" class="form-control" />
+                <select asp-for="DrugId" asp-items="@(new SelectList(drugs, nameof(AppTeka.Models.Drug.Id),nameof(AppTeka.Models.Drug.Name)))" class="form-control" ></select>
                 <span asp-validation-for="DrugId" class="text-danger"></span>
 
             </div>
