@@ -8,9 +8,9 @@
 8.dodanie logowania do klienta za pomocą Identity
 9.dodanie walidacji danych do klienta
 10.dodanie dockera do klienta
-11.
-12.
-13.
-14.
+11.dodanie data-bindings do formularzy aby nie wpisywać Id ręcznie
+12.rozbudowa walidacji o dodatkowe elementy
+13.dodanie dockera (nie zrealizowane)
+14.czyszczenie i poprawki kodu
 15.stworzenie dokumentacji
 16. prezentacja projektu
