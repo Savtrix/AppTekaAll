@@ -4,4 +4,4 @@ za komunikację pomiędzy WWW oraz serwerem REST. Całość wykonana jest w .NET
 Uruchomienie
 Wczytanie projektu do VS 2022 , uruchomienie konsoli dev oraz wykonanie migracji bazy AppTeka( dotnet ef database update)
 projekt jest już skompilowany więc następnie wystarczy uruchomić AppTeka.exe oraz ClientMVC.exe
-poza graficzną obsługą bazy , zmiany można wykonywać również za pomocą postmana.
+poza graficzną obsługą bazy , zmiany można wykonywać również za pomocą swaggera.
