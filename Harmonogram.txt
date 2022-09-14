@@ -1,0 +1,16 @@
+1.Utworzenie projektu i stworzenie bazy danych
+2.stworzenie podstawowej bazy danych
+3.Dodanie kontrolerów RestApi
+4.testowanie działania kontrolerów/podstawowy klient
+5.rozbudowa bazy
+6.dodanie klienta asp.net
+7.dodanie obsługi pełnego cruda do klienta
+8.dodanie logowania do klienta za pomocą Identity
+9.dodanie walidacji danych do klienta
+10.dodanie dockera do klienta
+11.
+12.
+13.
+14.
+15.stworzenie dokumentacji
+16. prezentacja projektu
