@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 
 var cultureInfo = new CultureInfo("en-US");
-cultureInfo.NumberFormat.CurrencySymbol = "€";
+cultureInfo.NumberFormat.CurrencySymbol = "ï¿½";
 
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
