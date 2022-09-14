@@ -66,7 +66,7 @@ namespace ClientMVC.Controllers
                 var client = new HttpClient();
                 using (client)
                 {
-                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/orderdetail", httpRequestMessage.Content);
+                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/orderdetails", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -119,7 +119,7 @@ namespace ClientMVC.Controllers
             var client = new HttpClient();
             using (client)
             {
-                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/OrderDetail/{id}");
+                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/orderdetails/{id}");
             }
             return RedirectToAction(nameof(Index));
         }
