@@ -21,8 +21,6 @@ namespace ClientMVC.Controllers
     [Authorize]
     public class PrescribtionDetailsController : Controller
     {
-        private HttpClient client = ControllerConstants.DefaultClient;
-
         // GET: PrescribtionDetailss
         public async Task<IActionResult> Index()
         {
@@ -65,7 +63,7 @@ namespace ClientMVC.Controllers
                 };
 
                 httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                var client = new HttpClient();
                 using (client)
                 {
                     await client.PostAsync($"{ControllerConstants.DefaultURI}/api/PrescribtionDetails", httpRequestMessage.Content);
@@ -105,7 +103,7 @@ namespace ClientMVC.Controllers
                 };
 
                 httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                var client = new HttpClient();
                 using (client)
                 {
                     await client.PutAsync($"{ControllerConstants.DefaultURI}/api/PrescribtionDetails", httpRequestMessage.Content);
@@ -118,6 +116,7 @@ namespace ClientMVC.Controllers
         // GET: PrescribtionDetails/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var client = new HttpClient();
             using (client)
             {
                 await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/PrescribtionDetails/{id}");

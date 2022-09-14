@@ -52,7 +52,7 @@ namespace ClientMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,NeedPrescribtion")] Customer Customer)
+        public async Task<IActionResult> Create([Bind("Name")] Customer Customer)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace ClientMVC.Controllers
                 var client = new HttpClient();
                 using (client)
                 {
-                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/Customer", httpRequestMessage.Content);
+                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/customer", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -78,7 +78,7 @@ namespace ClientMVC.Controllers
         {
             var _httpClient = new HttpClient();
             // http get request to a rest api address
-            var myObject = await _httpClient.GetFromJsonAsync<Customer>($"{ControllerConstants.DefaultURI}/api/Customer/{id}", new CancellationToken());
+            var myObject = await _httpClient.GetFromJsonAsync<Customer>($"{ControllerConstants.DefaultURI}/api/customer/{id}", new CancellationToken());
 
             // raise error if deserialization was not possible
             if (myObject == null)
@@ -92,7 +92,7 @@ namespace ClientMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,NeedPrescribtion")] Customer Customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Customer Customer)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace ClientMVC.Controllers
                 var client = new HttpClient();
                 using (client)
                 {
-                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/Customer", httpRequestMessage.Content);
+                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/customer", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -119,7 +119,7 @@ namespace ClientMVC.Controllers
             var client = new HttpClient();
             using (client)
             {
-                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/Customer/{id}");
+                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/customer/{id}");
             }
             return RedirectToAction(nameof(Index));
         }

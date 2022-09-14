@@ -1,37 +1,53 @@
-﻿@model AppTeka.Models.Drug
+﻿@model AppTeka.Models.Order
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "/Views/Shared/_Layout.cshtml";
+
+    var _httpClient = new HttpClient();
+    List<AppTeka.Models.Customer>? customers = await _httpClient.GetFromJsonAsync<List<AppTeka.Models.Customer>>($"{ClientMVC.Data.ControllerConstants.DefaultURI}/api/customer", new CancellationToken());
+    List<AppTeka.Models.ShopAssistant>? assistants = await _httpClient.GetFromJsonAsync<List<AppTeka.Models.ShopAssistant>>($"{ClientMVC.Data.ControllerConstants.DefaultURI}/api/shopassistant", new CancellationToken());
 }
 
 <h1>Edit</h1>
 
-<h4>Drug</h4>
+<h4>Orders</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label">Name</label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+             <div class="form-group">
+                <label asp-for="Sum" class="control-label">Sum</label>
+                <input asp-for="Sum" class="form-control" />
+                <span asp-validation-for="Sum" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label">Surname</label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="CustomerId" class="control-label">Customer</label>
+                <select asp-for="CustomerId" asp-items="@(new SelectList(customers, nameof(AppTeka.Models.Customer.Id),nameof(AppTeka.Models.Customer.Name)))" class="form-control" ></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+
             </div>
             <div class="form-group">
-                <label asp-for="NeedPrescribtion" class="control-label">NeedPrescribtion</label>
-                <select asp-for="NeedPrescribtion" class="form-control" >
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>  
-                    </select>
-                <span asp-validation-for="NeedPrescribtion" class="text-danger"></span>
+                <label asp-for="ShopAssistantId" class="control-label">ShopAssistant</label>
+               <select asp-for="ShopAssistantId" asp-items="@(new SelectList(assistants, nameof(AppTeka.Models.ShopAssistant.Id),nameof(AppTeka.Models.ShopAssistant.Name)))" class="form-control" ></select>
+                <span asp-validation-for="PrescribtionId" class="text-danger"></span>
+
             </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label">OrderDate</label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="CompletionDate" class="control-label">CompletionDate</label>
+                <input asp-for="CompletionDate" class="form-control" />
+                <span asp-validation-for="CompletionDate" class="text-danger"></span>
+
+            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -44,5 +60,8 @@
 </div>
 
 @section Scripts {
+    @{  
+        }
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

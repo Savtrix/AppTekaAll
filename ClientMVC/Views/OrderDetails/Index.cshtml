@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AppTeka.Models.Order>
+﻿@model IEnumerable<AppTeka.Models.OrderDetails>
 
 
 @{
@@ -6,7 +6,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Orders</h1>
+<h1>OrderDetails</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
@@ -18,19 +18,13 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sum)
+                @Html.DisplayNameFor(model => model.OrderId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
+                @Html.DisplayNameFor(model => model.DrugId)
             </th>
              <th>
-                @Html.DisplayNameFor(model => model.ShopAssistantId)
-            </th>
-             <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-             <th>
-                @Html.DisplayNameFor(model => model.CompletionDate)
+                @Html.DisplayNameFor(model => model.Quantity)
             </th>
             
             <th></th>
@@ -43,20 +37,14 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sum)
+                @Html.DisplayFor(modelItem => item.OrderId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
+                @Html.DisplayFor(modelItem => item.DrugId)
             </td>
               <td>
-                @Html.DisplayFor(modelItem => item.ShopAssistantId)
-            </td>
-              <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-              <td>
-                @Html.DisplayFor(modelItem => item.CompletionDate)
-            </td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>          
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>

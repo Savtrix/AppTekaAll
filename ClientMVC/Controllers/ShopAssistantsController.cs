@@ -21,14 +21,12 @@ namespace ClientMVC.Controllers
     [Authorize]
     public class ShopAssistantsController : Controller
     {
-        private HttpClient client = ControllerConstants.DefaultClient;
-
         // GET: ShopAssistantss
         public async Task<IActionResult> Index()
         {
             var _httpClient = new HttpClient();
             // http get request to a rest api address
-            var myObject = await _httpClient.GetFromJsonAsync<List<ShopAssistant>>($"{ControllerConstants.DefaultURI}/api/ShopAssistant", new CancellationToken());
+            var myObject = await _httpClient.GetFromJsonAsync<List<ShopAssistant>>($"{ControllerConstants.DefaultURI}/api/shopassistant", new CancellationToken());
 
             // raise error if deserialization was not possible
             if (myObject == null)
@@ -54,7 +52,7 @@ namespace ClientMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,NeedPrescribtion")] ShopAssistant ShopAssistant)
+        public async Task<IActionResult> Create([Bind("Name,Price")] ShopAssistant ShopAssistant)
         {
             if (ModelState.IsValid)
             {
@@ -65,10 +63,10 @@ namespace ClientMVC.Controllers
                 };
 
                 httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                var client = new HttpClient();
                 using (client)
                 {
-                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/ShopAssistant", httpRequestMessage.Content);
+                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/shopassistant", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -80,7 +78,7 @@ namespace ClientMVC.Controllers
         {
             var _httpClient = new HttpClient();
             // http get request to a rest api address
-            var myObject = await _httpClient.GetFromJsonAsync<ShopAssistant>($"{ControllerConstants.DefaultURI}/api/ShopAssistant/{id}", new CancellationToken());
+            var myObject = await _httpClient.GetFromJsonAsync<ShopAssistant>($"{ControllerConstants.DefaultURI}/api/shopassistant/{id}", new CancellationToken());
 
             // raise error if deserialization was not possible
             if (myObject == null)
@@ -94,7 +92,7 @@ namespace ClientMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,NeedPrescribtion")] ShopAssistant ShopAssistant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] ShopAssistant ShopAssistant)
         {
             if (ModelState.IsValid)
             {
@@ -105,10 +103,10 @@ namespace ClientMVC.Controllers
                 };
 
                 httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                var client = new HttpClient();
                 using (client)
                 {
-                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/ShopAssistant", httpRequestMessage.Content);
+                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/shopassistant", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -118,9 +116,10 @@ namespace ClientMVC.Controllers
         // GET: ShopAssistants/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var client = new HttpClient();
             using (client)
             {
-                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/ShopAssistant/{id}");
+                await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/shopassistant/{id}");
             }
             return RedirectToAction(nameof(Index));
         }

@@ -26,7 +26,7 @@ namespace ClientMVC.Controllers
         {
             var _httpClient = new HttpClient();
             // http get request to a rest api address
-            var myObject = await _httpClient.GetFromJsonAsync<List<OrderDetails>>($"{ControllerConstants.DefaultURI}/api/OrderDetail", new CancellationToken());
+            var myObject = await _httpClient.GetFromJsonAsync<List<OrderDetails>>($"{ControllerConstants.DefaultURI}/api/orderdetails", new CancellationToken());
 
             // raise error if deserialization was not possible
             if (myObject == null)
@@ -52,7 +52,7 @@ namespace ClientMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,NeedPrescribtion")] OrderDetails OrderDetail)
+        public async Task<IActionResult> Create([Bind("OrderId,DrugId,Quantity")] OrderDetails OrderDetail)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace ClientMVC.Controllers
                 var client = new HttpClient();
                 using (client)
                 {
-                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/OrderDetail", httpRequestMessage.Content);
+                    await client.PostAsync($"{ControllerConstants.DefaultURI}/api/orderdetail", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -78,7 +78,7 @@ namespace ClientMVC.Controllers
         {
             var _httpClient = new HttpClient();
             // http get request to a rest api address
-            var myObject = await _httpClient.GetFromJsonAsync<OrderDetails>($"{ControllerConstants.DefaultURI}/api/OrderDetail/{id}", new CancellationToken());
+            var myObject = await _httpClient.GetFromJsonAsync<OrderDetails>($"{ControllerConstants.DefaultURI}/api/orderdetails/{id}", new CancellationToken());
 
             // raise error if deserialization was not possible
             if (myObject == null)
@@ -92,7 +92,7 @@ namespace ClientMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,NeedPrescribtion")] OrderDetails OrderDetail)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderId,DrugId,Quantity")] OrderDetails OrderDetail)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace ClientMVC.Controllers
                 var client = new HttpClient();
                 using (client)
                 {
-                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/OrderDetail", httpRequestMessage.Content);
+                    await client.PutAsync($"{ControllerConstants.DefaultURI}/api/orderdetails", httpRequestMessage.Content);
                     return RedirectToAction(nameof(Index));
                 }
             }

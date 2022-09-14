@@ -21,8 +21,6 @@ namespace ClientMVC.Controllers
     [Authorize]
     public class OrdersController : Controller
     {
-        private HttpClient client = ControllerConstants.DefaultClient;
-
         // GET: Orders
         public async Task<IActionResult> Index()
         {
@@ -32,6 +30,14 @@ namespace ClientMVC.Controllers
 
             // raise error if deserialization was not possible
             if (myObject == null)
+                throw new Exception("Oops... Something went wrong");
+
+            var _httpClient2 = new HttpClient();
+            // http get request to a rest api address
+            var myObject2 = await _httpClient.GetFromJsonAsync<List<OrderDetails>>($"{ControllerConstants.DefaultURI}/api/orderdetails", new CancellationToken());
+
+            // raise error if deserialization was not possible
+            if (myObject2 == null)
                 throw new Exception("Oops... Something went wrong");
 
             return View(myObject);
@@ -54,7 +60,7 @@ namespace ClientMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,NeedPrescribtion")] Order Order)
+        public async Task<IActionResult> Create([Bind("Sum,CustomerId,ShopAssistantId,OrderDate")] Order Order)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +71,7 @@ namespace ClientMVC.Controllers
                 };
 
                 httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                var client = new HttpClient();
                 using (client)
                 {
                     await client.PostAsync($"{ControllerConstants.DefaultURI}/api/order", httpRequestMessage.Content);
@@ -105,7 +111,7 @@ namespace ClientMVC.Controllers
                 };
 
                 httpRequestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                var client = new HttpClient();
                 using (client)
                 {
                     await client.PutAsync($"{ControllerConstants.DefaultURI}/api/order", httpRequestMessage.Content);
@@ -118,6 +124,7 @@ namespace ClientMVC.Controllers
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var client = new HttpClient();
             using (client)
             {
                 await client.DeleteAsync($"{ControllerConstants.DefaultURI}/api/order/{id}");
